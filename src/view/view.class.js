@@ -9,28 +9,28 @@ class View{
             <th> ${product.id} </th>
             <th> ${product.name} </th>
             <th> ${product.units} </th>
-            <th> ${product.price} </th>
+            <th> ${product.price.toFixed(2)} €</th>
             <th> ${product.productImport().toFixed(2)} €</th>
             <th></th>`
+        newProdTr.setAttribute('id',product.id)
         tbodyTableProducts.appendChild(newProdTr)
 
     }
 
     renderEditProduct(product) {
-        const newProdTr = document.createElement('tr')
-        newProdTr.innerHTML = `
+        const nuevoProducto = document.getElementById(product.id)
+        nuevoProducto.innerHTML = `
             <th> ${product.id} </th>
             <th> ${product.name} </th>
             <th> ${product.units} </th>
-            <th> ${product.price} </th>
+            <th> ${product.price.toFixed(2)} €</th>
             <th> ${product.productImport().toFixed(2)} €</th>
             <th></th>`
-        let elementoViejo = tbodyTableProducts.getElementsByTagName('tr')[product.id - 1]
-        tbodyTableProducts.replaceChild(newProdTr,elementoViejo)
+        tbodyTableProducts.replaceChild(nuevoProducto,nuevoProducto)
     }
 
     renderDelProduct(id) {
-        const deleteProduct = tbodyTableProducts.getElementsByTagName('tr')[id - 1]
+        const deleteProduct = document.getElementById(id)
         tbodyTableProducts.removeChild(deleteProduct)
     }
 

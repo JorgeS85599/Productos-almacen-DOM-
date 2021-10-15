@@ -23,18 +23,29 @@ class Controller {
     deleteProductFromStore(prodId) {
         const findedProduct = this.store.findProduct(Number(prodId))
         if (findedProduct) {
-            confirm(`Vas a eliminar el producto con id: ${findedProduct.id} y nombre: ${findedProduct.name}`)
+            if(confirm(`Vas a eliminar el producto con id: ${findedProduct.id} y nombre: ${findedProduct.name}`)) {
+                if (findedProduct.units > 0) {
+                    if (confirm(`El producto con id: ${findedProduct.id} y nombre: ${findedProduct.name} tiene ${findedProduct.units} unidades en stock, si aceptas desaparecerán`)) {
+                        try {
+                            let deletedProduct = this.store.delProduct(prodId)
+                            this.view.renderDelProduct(deletedProduct.id)
+                        } catch (error) {
+                            this.view.renderErrorMessage(error)
+                        }
+                    }
+                } else {
+                    try {
+                        let deletedProduct = this.store.delProduct(prodId)
+                        this.view.renderDelProduct(deletedProduct.id)
+                    } catch (error) {
+                        this.view.renderErrorMessage(error)
+                    }
+                }
+            }
+        } else {
+            this.view.renderErrorMessage("No se ha encontrado el producto con id: " + prodId)
         }
 
-        if (findedProduct.units > 0) {
-            confirm(`El producto con id: ${findedProduct.id} y nombre: ${findedProduct.name} tiene ${findedProduct.units} unidades en stock, si aceptas desaparecerán`)
-        }
-        try {
-            let deletedProduct = this.store.delProduct(prodId)
-            this.view.renderDelProduct(deletedProduct.id)
-        } catch (error) {
-            this.view.renderErrorMessage(error)
-        }
         // No olvides pedir confirmación y, si el producto
         // tiene unidades pedir una segunda confirmación
     }

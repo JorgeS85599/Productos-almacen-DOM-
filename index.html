@@ -140,11 +140,11 @@
                         <label for="modprod-id">Id: </label><br>
                         <input type="number" id="modprod-id" name="modprod-id" required min="1" step="1"><br>
                         <label for="modprod-name">Nombre: </label><br>
-                        <input type="text" id="modprod-name" name="modprod-name" required minlength="3"><br>
+                        <input type="text" id="modprod-name" name="modprod-name" minlength="3"><br>
                         <label for="modprod-price">Precio/u: </label><br>
-                        <input type="text" id="modprod-price" name="modprod-price" step="0.01" value="0.00" placeholder="0.00"><br>
+                        <input type="text" id="modprod-price" name="modprod-price" step="0.01" placeholder="0.00"><br>
                         <label for="modprod-units">Unidades: </label><br>
-                        <input type="text" id="modprod-units" name="modprod-units"><br>
+                        <input type="number" id="modprod-units" name="modprod-units" min="0" step="1"><br>
                         <button type="submit" class="btn btn-default btn-primary">Modificar</button>
                         <button type="reset" class="btn btn-danger">Reset</button>
                     </fieldset>
